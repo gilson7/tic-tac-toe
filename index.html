@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>GSEVEN TTT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="pop">
+        <div class="logo"><img src="intro.svg" alt=""></div>
+        <div class="inputs">
+            <input type="text" class="txt" id="nameId" placeholder="your name">
+            <input type="text" class="txt" id="roomId"placeholder="room id">
+            <button onclick="enterRoom()" class="er">enter room</button>
+            <div>or</div>
+            <button onclick="createRoom()" class="cr">create room</button>
+        </div>
+    </div>
+    <div id="root">
+        
+    </div>
+    <div id="gameArea">
+        <div id="game">
+            <div class="itt" id="0"></div>
+            <div class="itt" id="1"></div>
+            <div class="itt" id="2"></div>
+            <div class="itt" id="3"></div>
+            <div class="itt" id="4"></div>
+            <div class="itt" id="5"></div>
+            <div class="itt" id="6"></div>
+            <div class="itt" id="7"></div>
+            <div class="itt" id="8"></div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+    <script src="render.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
