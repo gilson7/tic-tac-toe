@@ -10,6 +10,8 @@
     --color3-dec:46, 196, 181;
     --color4-dec:255, 159, 28;
     --color5-dec:253, 255, 252;
+
+    --br:4px;
 }
 body{
     margin: 0;
@@ -22,18 +24,18 @@ body{
     align-items: center;
     background: var(--color1);
     padding: 5px;
-    border-radius: 4px;
+    border-radius: var(--br);
 }
 .name {
     margin: 5px;
-    border-radius: 4px;
+    border-radius: var(--br);
     font-weight: 600;
 }
 .points {
     padding: 9px 10px;
     font-size: 20px;
     background: var(--color4);
-    border-radius: 4px;
+    border-radius: var(--br);
     color: var(--color1);
 }
 #pointsP1 {
@@ -89,7 +91,7 @@ body{
     height: fit-content;
     background-color: var(--color1);
     padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: var(--br);
     text-align: center;
 }
 
@@ -130,7 +132,7 @@ body{
     font-family: 'Amaranth', sans-serif;
     border: none;
     font-size: 20px;
-    border-radius: 4px;
+    border-radius: var(--br);
     padding: 4px 9px;
     transition: 100ms;
     width: 230px;
@@ -167,7 +169,7 @@ body{
     margin: 10px;
     outline:none;
     box-shadow: 0  7px  10px -2px rgba(var(--color1-dec),.5);
-    border-radius: 4px;
+    border-radius: var(--br);
     text-align: center;
     font-family: 'Amaranth', sans-serif;
 }
@@ -183,4 +185,60 @@ body{
 .txt::placeholder{
     color: var(--color3);
     opacity: 50%;
+}
+
+#popup{
+    z-index: 999999999999999999;
+    display:flex;
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(var(--color1-dec), 0.9);
+    max-width: 300px ;
+    height: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    color: var(--color5);
+    border-radius: var(--br);
+    transition:200ms cubic-bezier(.99,-0.23,1,.19);
+    border: solid 3px transparent;
+    outline: solid 3px rgba(var(--color1-dec), 0.4);
+    backdrop-filter: blur(20px);
+    box-shadow:  0 0px 90px 0px rgba(var(--color3-dec), 0.5);
+    transform: scale(0);
+}
+#msg{
+    display: flex;
+    align-items: center;
+    border-radius: var(--br);
+    padding-bottom: 20px;
+    padding-left: 10px;
+}
+#topBar{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    border-radius: var(--br);
+}
+#ppimg{
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    border-radius: var(--br);
+}
+#cl{
+    background-color: var(--color2);
+    padding: 3px;
+    display: flex;
+    border-radius: var(--br);
+    cursor: pointer;
+    transition: 200ms;
+}
+#cl:hover{
+    filter: brightness(1.5);
 }

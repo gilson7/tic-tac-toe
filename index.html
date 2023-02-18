@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
     <div id="pop">
@@ -37,9 +38,23 @@
             <div class="itt" id="8"></div>
         </div>
     </div>
+
+
+    <div id="popup">
+        <div id="topBar"><div id="cl" onclick="closePOP()"><span class="material-symbols-outlined">
+            close
+            </span></div></div>
+        <div id="msg">
+            <img src="o.svg" alt="" id="ppimg">
+            <div id="pptext">jogador 1 venceu</div>
+        </div>
+       
+    </div>
+
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
     <script src="render.js"></script>
     <script src="index.js"></script>
+
 </body>
 </html>

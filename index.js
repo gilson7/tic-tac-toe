@@ -1,6 +1,7 @@
 let ROOM  = "123456"
 let profile = 0
 let permIssion = 0
+let playerCount = 0
 const firebaseConfig = {
     apiKey: "AIzaSyCFuzL6RLdog_JAb2FVRkeIRp85tPSQD7U",
     authDomain: "notes-5aa5e.firebaseapp.com",
@@ -46,7 +47,7 @@ const firebaseConfig = {
   let gameInfo = {
     player1:{
         name:"player-1",
-        points:1,
+        points:0,
     },
     player2:{
         name:"player-2",
@@ -73,7 +74,7 @@ const firebaseConfig = {
       object[ind].addEventListener("mousedown", () => {
     if (permIssion==profile) {
         inn(document.getElementById(object[ind].id)); 
-    }
+    }else{ppp("S","wait your turn to play")}
       });
   }
   
@@ -143,28 +144,26 @@ const firebaseConfig = {
                   tie();
               }, 100);
               pos =  [[7], [7], [7], [7], [7], [7], [7], [7], [7]];
+              draw()
           }
       }
   }
   function winer(wi) {
-    console.log(wi,profile)
-    if (profile==wi) {
-        alert("win")
-    }
-    else if((profile!=wi)) {
-      alert("lose")
-    }
-    if(profile==1){
-      gameInfo.player2.points +=1
-    }
-    else if(profile == 0){
-      gameInfo.player1.points +=1
-    }
-    reloadData(pos,gameInfo,permIssion)
-    render()
+        if(wi==1){
+          ppp("x.svg",`${gameInfo.player2.name}win`)
+          gameInfo.player2.points +=1
+
+        }
+        else if(wi == 0){
+          gameInfo.player1.points +=1
+          ppp("o.svg",`${gameInfo.player1.name}win`)
+        }
+        setTimeout(()=>{closePOP()},4000)
+        reloadData(pos,gameInfo,permIssion)
+        render()
   }
   function tie(){
-    alert("empate")
+    ppp("fds","tie")
   }
   render()
   
@@ -191,10 +190,30 @@ function reloadData(game,players,vez) {
     storage.ref('users/' + ROOM).set({
       game: game,
       players: players,
-      perm : vez
+      perm : vez,
+      nop:playerCount
     });
    console.log(pos)
 
+}
+
+ async  function listener() {
+  var starCountRef = storage.ref('users/' + ROOM);
+  starCountRef.on('value', (snapshot) => {
+  const data = snapshot.val();
+  permIssion = data.perm
+  gameInfo = data.players
+  pos = data.game
+  playerCount = data.nop
+  let ni = document.getElementById("nameId")
+  if(profile == 1&&data.players.player2.name=="player-2"){
+    gameInfo.player2.name = ni.value
+  }
+  render()
+  draw()
+  check(0)
+  check(1)
+});
 }
 let inputText = document.getElementById("roomId")
 function enterRoom(){
@@ -205,31 +224,24 @@ function enterRoom(){
       if(ri.value.length==5){
         ROOM = inputText.value
         profile = 1
-          var starCountRef = storage.ref('users/' + ROOM);
-          starCountRef.on('value', (snapshot) => {
-          const data = snapshot.val();
-          permIssion = data.perm
-          gameInfo = data.players
-          pos = data.game
-          render()
-          draw()
-          check(permIssion)
-          });
-          closePPP()
-          render()
+        listener().then(()=>{
+          console.log(gameInfo)
+        })
+        playerCount +=1
+        closePPP()
+        render()
+      
       }else{
-        alert("invalid room id")
+        ppp("","invalid room id")
       }
     }else{
-      alert("insert your name")
+      ppp("","insert your name")
     }
     
 
   }else{
-    alert("insert a room id")
+    ppp("","insert a room id")
   }
-
-
 }
 
 function createRoom(){
@@ -238,22 +250,13 @@ function createRoom(){
     profile = 0
     gameInfo.player1.name = ni.value
     ROOM = idgnr()
-      reloadData(pos,gameInfo,player)
-      var starCountRef = storage.ref('users/' + ROOM);
-      starCountRef.on('value', (snapshot) => {
-      const data = snapshot.val();
-      permIssion = data.perm
-      gameInfo = data.players
-      pos = data.game
-      render()
-      draw()
-      check(permIssion)
-    });
+    reloadData(pos,gameInfo,player)
+    listener()
     closePPP()
     render()
   }
   else{
-    alert("insert your name")
+    ppp("","insert your name")
   }
 }
 function idgnr() {
@@ -269,4 +272,18 @@ function closePPP(){
     document.getElementById("pop").style.display="none"
 }
 
+
+//popup
+  var im = document.getElementById("ppimg")
+  var pptext = document.getElementById("pptext")
+  var ppy = document.getElementById("popup")
+  function ppp(img,text) {
+    ppy.style.transform="scale(1)"
+    pptext.innerHTML = text
+    Image.src = img
+  }
+  function closePOP(){
+    ppy.style.transform="scale(0)"
+  }
+//ppp//
 draw()
